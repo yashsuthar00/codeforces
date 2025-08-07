@@ -19,6 +19,7 @@ int main() {
         if (i != nums.size() - 1)
             cout << "+";
     }
+    cout << endl;
 
     return 0;
 }

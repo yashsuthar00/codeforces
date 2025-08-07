@@ -13,6 +13,6 @@ int main() {
         if(score >= cutoff && score > 0) count++;
     }
 
-    cout << count;
+    cout << count << endl;
     return 0;
 }

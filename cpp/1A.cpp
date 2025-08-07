@@ -10,6 +10,6 @@ int main() {
     long long tiles_width = (n + a - 1) / a;
     long long tiles_height = (m + a - 1) / a;
 
-    cout << tiles_width * tiles_height;
+    cout << tiles_width * tiles_height << endl;
     return 0;
 }

@@ -2,7 +2,7 @@
 
 import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String s = sc.next();
@@ -20,6 +20,7 @@ public class Main {
             if (i != nums.length - 1)
                 System.out.print("+");
         }
+        System.out.println(); // Add newline at the end
 
         sc.close();
     }

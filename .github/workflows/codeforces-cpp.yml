@@ -1,0 +1,58 @@
+name: Codeforces C++ Solution Check
+
+on:
+  push:
+    paths:
+      - 'cpp/*.cpp'
+      - 'testcases/*'
+  pull_request:
+    paths:
+      - 'cpp/*.cpp'
+      - 'testcases/*'
+
+jobs:
+  build-and-test-cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile and test all C++ files
+        run: |
+          shopt -s nullglob
+          for file in cpp/*.cpp; do
+            base=$(basename "$file" .cpp)
+            echo "Compiling $file..."
+            g++ -std=c++17 "$file" -o "/tmp/$base" || { echo "❌ Failed to compile $file"; exit 1; }
+            echo "✅ Compiled $file successfully"
+            
+            if [ -f "testcases/$base.in" ]; then
+              echo "Running $file with input testcases/$base.in..."
+              "/tmp/$base" < "testcases/$base.in" > "/tmp/$base.actual"
+              
+              if [ -f "testcases/$base.out" ]; then
+                echo "Comparing output with expected result..."
+                # Normalize both outputs by trimming whitespace
+                tr -d '\r' < "/tmp/$base.actual" | sed 's/[[:space:]]*$//' > "/tmp/$base.actual_clean"
+                tr -d '\r' < "testcases/$base.out" | sed 's/[[:space:]]*$//' > "/tmp/$base.expected_clean"
+                
+                if diff -w "/tmp/$base.expected_clean" "/tmp/$base.actual_clean" > /dev/null; then
+                  echo "✅ Output matches for $file"
+                else
+                  echo "❌ Output mismatch for $file"
+                  echo "Expected (hex):"
+                  hexdump -C "/tmp/$base.expected_clean"
+                  echo "Actual (hex):"
+                  hexdump -C "/tmp/$base.actual_clean"
+                  echo "Expected (text):"
+                  cat "/tmp/$base.expected_clean"
+                  echo "Actual (text):"
+                  cat "/tmp/$base.actual_clean"
+                  exit 1
+                fi
+              else
+                echo "⚠️ No expected output file found for $file, skipping output check"
+              fi
+            else
+              echo "⚠️ No input file found for $file, skipping test"
+            fi
+          done
+          echo "🎉 All C++ files compiled and tested successfully!"

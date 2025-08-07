@@ -10,9 +10,9 @@ int main() {
         b[i] = tolower(b[i]);
     }
 
-    if (a < b) cout << -1;
-    else if (a > b) cout << 1;
-    else cout << 0;
+    if (a < b) cout << -1 << endl;
+    else if (a > b) cout << 1 << endl;
+    else cout << 0 << endl;
 
     return 0;
 }

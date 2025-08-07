@@ -10,6 +10,6 @@ int main() {
         if (a + b + c >= 2)
             solved++;
     }
-    cout << solved;
+    cout << solved << endl;
     return 0;
 }
