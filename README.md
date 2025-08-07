@@ -55,6 +55,17 @@ This repository uses GitHub Actions to ensure all solutions compile and pass sam
 
 ---
 
+## ⚠️ Java Submission Note
+
+- **For Codeforces submission:**
+  - You must use `public class Main` in a file named `Main.java`.
+- **For this repository and CI:**
+  - All Java files use `class Main` (without `public`) in files named after the problem (e.g., `236A.java`).
+  - This is required because Java does not allow a `public` class in a file with a different name.
+- If you want to submit a solution to Codeforces, rename your file to `Main.java` and change `class Main` to `public class Main` before submitting.
+
+---
+
 ## 💬 Questions & Discussions
 
 - If you have questions, suggestions, or want to discuss anything related to this repository, please use the **GitHub Discussions** section!
