@@ -4,11 +4,9 @@ on:
   push:
     paths:
       - 'cpp/*.cpp'
-      - 'testcases/*'
   pull_request:
     paths:
       - 'cpp/*.cpp'
-      - 'testcases/*'
 
 jobs:
   build-and-test-cpp:

@@ -4,11 +4,9 @@ on:
   push:
     paths:
       - 'java/*.java'
-      - 'testcases/*'
   pull_request:
     paths:
       - 'java/*.java'
-      - 'testcases/*'
 
 jobs:
   build-and-test-java:
